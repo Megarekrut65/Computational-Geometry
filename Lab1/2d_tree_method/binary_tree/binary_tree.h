@@ -1,22 +1,25 @@
 #pragma once
+
 #include <memory>
 #include "binary_node.h"
 
-namespace tree{
+namespace tree {
     template<typename ValueType>
-    class BinaryTree{
+    class BinaryTree {
     protected:
         using Node = TreeNode<ValueType>;
         using NodePtr = std::shared_ptr<Node>;
         NodePtr root;
     public:
         BinaryTree();
+
         void add(ValueType value);
+
         template<typename T>
-        friend std::ostream& operator<<(std::ostream& out, const BinaryTree<T>& tree);
+        friend std::ostream &operator<<(std::ostream &out, const BinaryTree<T> &tree);
     };
 }
-namespace tree{
+namespace tree {
     template<typename NodeType>
     BinaryTree<NodeType>::BinaryTree():root(nullptr) {}
 
@@ -24,28 +27,29 @@ namespace tree{
     void BinaryTree<ValueType>::add(ValueType value) {
         NodePtr node = std::make_shared<Node>(value);
         NodePtr current = root;
-        while (current != nullptr){
-            if(value >= current->value){
-                if(current->right){
+        while (current != nullptr) {
+            if (value >= current->value) {
+                if (current->right) {
                     current = current->right;
                     continue;
                 }
                 current->right = node;
                 break;
             }
-            if(!current->left){
+            if (!current->left) {
                 current->left = node;
                 break;
             }
             current = current->left;
         }
-        if(!root){
+        if (!root) {
             root = node;
         }
     }
+
     template<typename T>
     std::ostream &operator<<(std::ostream &out, const BinaryTree<T> &tree) {
-        out <<"->root: "<<tree.root;
+        out << "->root: " << tree.root;
         return out;
     }
 }
