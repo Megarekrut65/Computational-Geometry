@@ -5,7 +5,7 @@
 namespace tree{
     template<typename ValueType>
     class BinaryTree{
-    private:
+    protected:
         using Node = TreeNode<ValueType>;
         using NodePtr = std::shared_ptr<Node>;
         NodePtr root;
@@ -15,7 +15,8 @@ namespace tree{
         template<typename T>
         friend std::ostream& operator<<(std::ostream& out, const BinaryTree<T>& tree);
     };
-
+}
+namespace tree{
     template<typename NodeType>
     BinaryTree<NodeType>::BinaryTree():root(nullptr) {}
 
@@ -44,8 +45,7 @@ namespace tree{
     }
     template<typename T>
     std::ostream &operator<<(std::ostream &out, const BinaryTree<T> &tree) {
-        out <<tree.root;
+        out <<"->root: "<<tree.root;
         return out;
     }
-
 }

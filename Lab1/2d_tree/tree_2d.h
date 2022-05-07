@@ -1,41 +1,24 @@
 #pragma once
 
 #include <algorithm>
-#include "binary_tree.h"
-#include "kd_value.h"
+#include "../binary_tree/binary_tree.h"
+#include "value_2d.h"
 
 namespace tree_2d{
-    using namespace tree;
-    class Tree2D:public BinaryTree<KdValue>{
+
+    class Tree2D:public tree::BinaryTree<Value2D>{
+    private:
+        static std::size_t get_middle_point_index(Set& points, bool vertical = true);
+        static Line get_line(const Point& point, Area area, bool vertical= true);
+        static std::size_t get_middle_index(Set& points, bool vertical= true);
+        static Set get_first_set(Set& points, std::size_t index);
+        static Set get_second_set(Set& points, std::size_t index);
+        static Area get_first_area(Area& area, const Point& point, bool vertical = true);
+        static Area get_second_area(Area& area, const Point& point, bool vertical = true);
+        NodePtr create_tree(Set& points,Area area, bool vertical = true);
     public:
-        Tree2D();
         explicit Tree2D(Set points);
-        KdValue search(const QueryRegion& region);
+        Value2D search(const QueryRegion& region);
     };
-
-    Tree2D::Tree2D():BinaryTree<KdValue>() {
-    }
-
-    KdValue Tree2D::search(const QueryRegion &region) {
-
-    }
-
-    Tree2D::Tree2D(Set points) {
-        if(points.empty()){
-            throw std::invalid_argument{"There must be points count > 0"};
-        }
-        std::sort(points.begin(), points.end(), [](const point::Point& one, const point::Point& two){
-            return two.x > one.x;
-        });
-        std::size_t middle = points.size()/2;
-        point::Point point;
-        if(points.size()%2==0){
-            point = points[middle-1].x < points[middle].x?points[middle-1]:points[middle];
-        }else{
-            point = points[middle];
-        }
-        std::cout << point << std::endl;
-    }
-
     using Tree = Tree2D;
 }

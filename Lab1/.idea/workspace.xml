@@ -5,23 +5,26 @@
       <config projectName="Lab1" targetName="Lab1" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
       <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7115bbbd-46cb-4eb3-a98f-93c2df689d46" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/2d_tree/binary_node.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2d_tree/binary_tree.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2d_tree/kd_set.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2d_tree/kd_value.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2d_tree/tree_2d.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/area.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/line.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/point.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2d_tree/tree_2d.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2d_tree/value_2d.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2d_tree/value_2d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/binary_node.h" beforeDir="false" afterPath="$PROJECT_DIR$/binary_tree/binary_node.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/binary_tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/binary_tree/binary_tree.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/kd_set.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/kd_value.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/tree_2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/2d_tree/tree_2d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/area.h" beforeDir="false" afterPath="$PROJECT_DIR$/data/area.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/line.h" beforeDir="false" afterPath="$PROJECT_DIR$/data/line.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/point.h" beforeDir="false" afterPath="$PROJECT_DIR$/data/point.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +38,14 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -61,7 +72,15 @@
     <property name="cf.first.check.clang-format" value="false" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="cmake.loaded.for.project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C/C++" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\repos\Megarekrut65\Computational-Geometry\Lab1" />
+      <recent name="E:\repos\Megarekrut65\Computational-Geometry\Lab1\binary_tree" />
+      <recent name="E:\repos\Megarekrut65\Computational-Geometry\Lab1\data" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Lab1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Lab1" TARGET_NAME="Lab1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Lab1" RUN_TARGET_NAME="Lab1">
@@ -85,6 +104,8 @@
       <updated>1651685990431</updated>
       <workItem from="1651685996303" duration="1068000" />
       <workItem from="1651856512718" duration="10485000" />
+      <workItem from="1651922317640" duration="17024000" />
+      <workItem from="1651942542371" duration="2647000" />
     </task>
     <servers />
   </component>
