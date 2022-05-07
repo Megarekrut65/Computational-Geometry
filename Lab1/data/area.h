@@ -10,7 +10,10 @@ namespace area{
         Area2D(const point::Point2D<T> &point1, const point::Point2D<T> &point2);
         Area2D<T> intersection(Area2D<T> area) const;
         bool is_empty() const;
+        bool contains(const point::Point2D<T>& point) const;
     };
+    template<typename T>
+    std::ostream& operator<<(std::ostream& out, const Area2D<T>& area);
 }
 namespace area{
     template<typename T>
@@ -27,5 +30,19 @@ namespace area{
     template<typename T>
     bool Area2D<T>::is_empty() const {
         return point1.x > point2.x || point1.y > point2.y;
+    }
+
+    template<typename T>
+    bool Area2D<T>::contains(const point::Point2D<T>& point) const{
+        return point.x >= point1.x
+            && point.x <= point2.x
+            && point.y >= point1.y
+            && point.y <= point2.y;
+    }
+    template<typename T>
+    std::ostream& operator<<(std::ostream& out, const Area2D<T>& area){
+        out << "[" << area.point1.x << ", " << area.point1.y
+            <<"]x[" << area.point2.x << ", " << area.point2.y<<"]";
+        return out;
     }
 }

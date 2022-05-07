@@ -18,5 +18,6 @@ int main() {
     set.push_back(Point{17,9, "p9"});
     Tree tree{set};
     std::cout << tree << std::endl;
+    std::cout << tree.search(std::make_shared<Area>(Point {6,5}, Point{15,12})) << std::endl;
     return 0;
 }

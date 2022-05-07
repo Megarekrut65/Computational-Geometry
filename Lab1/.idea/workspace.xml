@@ -12,19 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7115bbbd-46cb-4eb3-a98f-93c2df689d46" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/2d_tree/tree_2d.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2d_tree/value_2d.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2d_tree/value_2d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2d_tree/binary_node.h" beforeDir="false" afterPath="$PROJECT_DIR$/binary_tree/binary_node.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2d_tree/binary_tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/binary_tree/binary_tree.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/2d_tree/kd_set.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2d_tree/kd_value.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/tree_2d.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/2d_tree/tree_2d.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/2d_tree/tree_2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/2d_tree/tree_2d.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/value_2d.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/2d_tree/value_2d.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2d_tree/value_2d.h" beforeDir="false" afterPath="$PROJECT_DIR$/2d_tree/value_2d.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/area.h" beforeDir="false" afterPath="$PROJECT_DIR$/data/area.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/line.h" beforeDir="false" afterPath="$PROJECT_DIR$/data/line.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/point.h" beforeDir="false" afterPath="$PROJECT_DIR$/data/point.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +98,7 @@
       <workItem from="1651685996303" duration="1068000" />
       <workItem from="1651856512718" duration="10485000" />
       <workItem from="1651922317640" duration="17024000" />
-      <workItem from="1651942542371" duration="2647000" />
+      <workItem from="1651942542371" duration="5721000" />
     </task>
     <servers />
   </component>

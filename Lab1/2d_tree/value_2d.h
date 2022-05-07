@@ -33,4 +33,5 @@ namespace tree_2d{
         bool operator<=(const Value2D& node);
     };
     std::ostream& operator<<(std::ostream& out, const Value2D& value);
+    std::ostream &operator<<(std::ostream& out, const Set& set);
 }

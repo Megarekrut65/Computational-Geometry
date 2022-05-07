@@ -15,10 +15,11 @@ namespace tree_2d{
         static Set get_second_set(Set& points, std::size_t index);
         static Area get_first_area(Area& area, const Point& point, bool vertical = true);
         static Area get_second_area(Area& area, const Point& point, bool vertical = true);
+        Set search_in_node(const NodePtr& node,const QueryRegion& region);
         NodePtr create_tree(Set& points,Area area, bool vertical = true);
     public:
         explicit Tree2D(Set points);
-        Value2D search(const QueryRegion& region);
+        Set search(const QueryRegion& region);
     };
     using Tree = Tree2D;
 }

@@ -39,8 +39,10 @@ namespace tree_2d{
         return point_set.empty();
     }
     std::ostream &operator<<(std::ostream& out, const Set& set){
+        out << "{";
         for(const auto& item:set)
-            out << item << " ";
+            out << item.label << " ";
+        out <<"}";
         return out;
     }
     std::ostream& operator<<(std::ostream& out, const Value2D& value){

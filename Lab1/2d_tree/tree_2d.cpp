@@ -1,10 +1,36 @@
 #include "tree_2d.h"
 
+#include <utility>
+
 namespace tree_2d{
     using namespace tree;
 
-    Value2D Tree2D::search(const QueryRegion &region) {
+    Set Tree2D::search_in_node(const NodePtr& node, const QueryRegion& region) {
+        if(node == nullptr || node->value.is_leaf()) return {};
+        node->value.query_region = region;
+        QueryRegion first = std::make_shared<Area>(node->left->value.area.intersection(*region)),
+                second = std::make_shared<Area>(node->right->value.area.intersection(*region));
+        if(first->is_empty() && second->is_empty()) return {};
+        if(!first->is_empty()&&second->is_empty()){
+            return search_in_node(node->left, first);
+        }
+        if(first->is_empty()&&!second->is_empty()){
+            return search_in_node(node->right, second);
+        }
+        Set res;
+        if(region->contains(node->value.point)){
+            res.push_back(node->value.point);
+        }
+        Set left = search_in_node(node->left, first);
+        res.insert(res.end(), left.begin(), left.end());
+        Set right = search_in_node(node->right, second);
+        res.insert(res.end(), right.begin(), right.end());
 
+        return res;
+    }
+    Set Tree2D::search(const QueryRegion& region) {
+        if(region->is_empty()) return {};
+        return search_in_node(root, region);
     }
 
     Tree2D::Tree2D(Set points) {
@@ -75,4 +101,5 @@ namespace tree_2d{
                ? Line{Point{point.x, area.point1.y}, Point{point.x, area.point2.y}}
                :Line{Point{area.point1.x, point.y}, Point{area.point2.x, point.y}};
     }
+
 }
