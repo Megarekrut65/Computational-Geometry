@@ -2,11 +2,12 @@
 #include "data/point.h"
 #include "data/matrix/square_matrix.h"
 #include "data/triangle.h"
-#include "math_functions.h"
+#include "../additional_functions/math_functions.h"
 #include <vector>
 #include <stack>
 #include "data/pair.h"
 #include "data/triangulation.h"
+#include "../additional_functions/array_functions.h"
 
 namespace dt{
     using Set = std::vector<Point>;

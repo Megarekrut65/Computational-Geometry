@@ -43,10 +43,7 @@ namespace dt{
 
 
     Point DelaunayTriangulation::remove_random_point() {
-        std::size_t index = rand()%points.size();
-        Point point = points[index];
-        points.erase(points.begin()+index);
-        return point;
+        return af::remove_random_item(points);
     }
 
     bool DelaunayTriangulation::add_next() {

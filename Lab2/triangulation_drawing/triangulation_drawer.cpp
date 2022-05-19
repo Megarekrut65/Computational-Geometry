@@ -5,14 +5,11 @@
 namespace drawer{
     const unsigned TriangulationDrawer::HEIGHT = 800;
     const unsigned TriangulationDrawer::WIDTH = 800;
-    const sf::Color TriangulationDrawer::BACKGROUND = sf::Color(245,222,179);
-    const sf::Color TriangulationDrawer::LINE = sf::Color::Black;
-    const sf::Color TriangulationDrawer::POINT = sf::Color::Red;
-    const sf::Color TriangulationDrawer::CIRCLE = sf::Color(46,139,87, 120);
+
     void TriangulationDrawer::run() {
         while (window.isOpen()){
             events();
-            window.clear(BACKGROUND);
+            window.clear(DrawingColors::BACKGROUND);
             draw();
             window.display();
         }
@@ -27,15 +24,12 @@ namespace drawer{
             if (event.type == sf::Event::KeyPressed){
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
                     if(delaunay_triangulation.add_next()){
-                        create_shapes_triangulation();
-                    }else{
-                        if(points_to_insert.empty()) continue;
-                        std::size_t index = rand() % points_to_insert.size();
-                        dt::Point point = points_to_insert[index];
-                        points_to_insert.erase(points_to_insert.begin() + index);
-                        delaunay_triangulation.add_point(point);
-                        create_shapes_triangulation();
+                        converter.convert();
+                        continue;
                     }
+                    if(points_to_insert.empty()) continue;
+                    delaunay_triangulation.add_point(af::remove_random_item(points_to_insert));
+                    converter.convert();
                 }
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::C)){
                     need_circle = !need_circle;
@@ -53,63 +47,27 @@ namespace drawer{
 
     void TriangulationDrawer::draw() {
         if(need_circle){
-            for(const auto& circle:circles){
+            for(const auto& circle:converter.get_circles()){
                 window.draw(circle);
             }
         }
-        for(const auto& line:lines){
+        for(const auto& line:converter.get_lines()){
             sf::Vertex l[]= {line[0], line[1]};
             window.draw(l, 2, sf::Lines);
         }
-        for(const auto& point:points){
+        for(const auto& point:converter.get_points()){
             window.draw(point);
         }
     }
 
     TriangulationDrawer::TriangulationDrawer(const dt::Set &initial_points, dt::Set points, int zoom)
-    : delaunay_triangulation(initial_points), points_to_insert(std::move(points)), zoom(zoom),
+    : delaunay_triangulation(initial_points), points_to_insert(std::move(points)),
         screenshot(ScreenshotTaker("../screenshots", window)) {
+        converter = TriangulationDrawingConverter(&delaunay_triangulation, Normalizer(HEIGHT, WIDTH, zoom));
         window.create(sf::VideoMode(WIDTH, HEIGHT), "Delaunay Triangulation", sf::Style::Default);
-        create_shapes_triangulation();
+        converter.convert();
     }
 
-    void TriangulationDrawer::create_shapes_triangulation() {
-        circles.clear();
-        lines.clear();
-        points.clear();
-        auto vertices = delaunay_triangulation.get_vertices();
-        for(const auto& vertex:vertices){
-            sf::CircleShape point(3.0f);
-            point.setFillColor(POINT);
-            point.setPosition(normalize_x(vertex->x) - point.getRadius(),
-                              normalize_y(vertex->y) - point.getRadius());
-            points.push_back(point);
-        }
-        auto edges = delaunay_triangulation.get_edges();
-        for(const auto& edge:edges){
-            lines.push_back({sf::Vertex(sf::Vector2f(normalize_x(edge->start->x), normalize_y(edge->start->y)), LINE),
-                             sf::Vertex(sf::Vector2f(normalize_x(edge->end->x), normalize_y(edge->end->y)), LINE)});
-        }
-        auto faces = delaunay_triangulation.get_faces();
-        for(const auto& face:faces){
-            dt::Point center = math::get_circle_center_around_triangle(*face);
-            float length = math::get_length(*(face->a), center);
-            sf::CircleShape circle(zoom*length);
-            circle.setFillColor(sf::Color(0,0,0,0));
-            circle.setPosition(normalize_x(center.x) - circle.getRadius(),
-                               normalize_y(center.y) - circle.getRadius());
-            circle.setOutlineThickness(1.0f);
-            circle.setOutlineColor(CIRCLE);
-            circles.push_back(circle);
-        }
-    }
 
-    float TriangulationDrawer::normalize_x(float x) {
-        return x*zoom + WIDTH/2.0f;
-    }
-
-    float TriangulationDrawer::normalize_y(float y) {
-        return -y*zoom + HEIGHT/2.0f;
-    }
 
 }

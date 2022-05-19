@@ -1,7 +1,7 @@
 #pragma once
-#include "data/triangle.h"
-#include "data/matrix/square_matrix.h"
-#include "data/line.h"
+#include "../delaunay_triangulation/data/triangle.h"
+#include "../delaunay_triangulation/data/matrix/square_matrix.h"
+#include "../delaunay_triangulation/data/line.h"
 #include <cmath>
 #include <sstream>
 

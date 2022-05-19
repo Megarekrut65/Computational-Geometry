@@ -4,7 +4,7 @@
 #include "line.h"
 #include <vector>
 #include <memory>
-#include "../math_functions.h"
+#include "../../additional_functions/math_functions.h"
 
 namespace dt{
     using Point = point::Point2D<float>;
