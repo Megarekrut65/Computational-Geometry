@@ -92,15 +92,12 @@ namespace drawer{
         }
         auto faces = delaunay_triangulation.get_faces();
         for(const auto& face:faces){
-            dt::Line ab(face->a, face->b), bc(face->b, face->c);
-            dt::Line bi_ab = math::bisection(ab), bi_bc = math::bisection(bc);
-            std::shared_ptr<dt::Point> center = math::intersect(bi_ab, bi_bc);
-            if(center == nullptr) continue;
-            float length = math::get_length(*(face->a), *center);
+            dt::Point center = math::get_circle_center_around_triangle(*face);
+            float length = math::get_length(*(face->a), center);
             sf::CircleShape circle(zoom*length);
             circle.setFillColor(sf::Color(0,0,0,0));
-            circle.setPosition(normalize_x(center->x) - circle.getRadius(),
-                               normalize_y(center->y) - circle.getRadius());
+            circle.setPosition(normalize_x(center.x) - circle.getRadius(),
+                               normalize_y(center.y) - circle.getRadius());
             circle.setOutlineThickness(1.0f);
             circle.setOutlineColor(CIRCLE);
             circles.push_back(circle);
