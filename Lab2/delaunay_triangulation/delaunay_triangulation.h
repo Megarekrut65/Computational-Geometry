@@ -14,12 +14,15 @@ namespace dt{
     private:
         Set points;
         Triangulation triangulation;
-        void add_point(Point point);
         Point remove_random_point();
         void run(std::stack<pa::Pair<Face, Edge>>& stack);
     public:
         explicit DelaunayTriangulation(Set points);
-        void add_next();
+        bool add_next();
+        void add_point(Point point);
+        std::vector<Vertex> get_vertices();
+        std::vector<Edge> get_edges();
+        std::vector<Face> get_faces();
     };
 }
 

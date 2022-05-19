@@ -13,10 +13,17 @@ namespace dt{
     }
 
     Face Triangulation::find_triangle(Point point) {
-        for(auto face:faces){
-            if(math::is_point_in_triangle(*face, point)) return face;
+        Face res = nullptr;
+        for(const auto& face:faces){
+            if(math::is_point_in_triangle(*face, point)){
+                if(res == nullptr){
+                    res = face;
+                    continue;
+                }
+                res = math::get_area(*res) > math::get_area(*face)?face:res;
+            }
         }
-        return nullptr;
+        return res;
     }
 
     Vertex Triangulation::add_point(Point point) {
@@ -69,6 +76,18 @@ namespace dt{
                 return;
             }
         }
+    }
+
+    const std::vector<Vertex> &Triangulation::get_vertices() const {
+        return vertices;
+    }
+
+    const std::vector<Face> &Triangulation::get_faces() const {
+        return faces;
+    }
+
+    const std::vector<Edge> &Triangulation::get_edges() const {
+        return edges;
     }
 
     Triangulation::Triangulation()=default;

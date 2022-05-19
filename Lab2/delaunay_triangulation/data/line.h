@@ -62,7 +62,7 @@ namespace line {
 
     template<typename T>
     std::ostream &operator<<(std::ostream &out, const Line2D<T> &line) {
-        out << line.start << "->" << line.end;
+        out << *(line.start) << "->" << *(line.end);
         return out;
     }
 }

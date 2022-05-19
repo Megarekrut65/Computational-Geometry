@@ -7,15 +7,23 @@
 #include "../math_functions.h"
 
 namespace dt{
-    using Point = point::Point2D<double>;
-    using Line = line::Line2D<double>;
-    using Triangle = tri::Triangle2D<double>;
+    using Point = point::Point2D<float>;
+    using Line = line::Line2D<float>;
+    using Triangle = tri::Triangle2D<float>;
     using Vertex = std::shared_ptr<Point>;
     using Face = std::shared_ptr<Triangle>;
     using Edge = std::shared_ptr<Line>;
     class Triangulation {
     private:
         std::vector<Vertex> vertices;
+    public:
+        const std::vector<Vertex> &get_vertices() const;
+
+        const std::vector<Face> &get_faces() const;
+
+        const std::vector<Edge> &get_edges() const;
+
+    private:
         std::vector<Face> faces;
         std::vector<Edge> edges;
     public:

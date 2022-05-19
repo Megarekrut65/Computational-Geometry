@@ -36,4 +36,5 @@ namespace point {
             << "}";
         return out;
     }
+
 }
