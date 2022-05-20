@@ -7,13 +7,6 @@ namespace math{
         Real radius = get_length(*(triangle.a), center);
         Real len = get_length(d, center);
         return len < radius;
-//        mymatrix::SquareMatrix matrix{{
-//            {triangle.a->x, triangle.a->y, triangle.a->x*triangle.a->x + triangle.a->y*triangle.a->y, 1},
-//            {triangle.b->x, triangle.b->y, triangle.b->x*triangle.b->x + triangle.b->y*triangle.b->y, 1},
-//            {triangle.c->x, triangle.c->y, triangle.c->x*triangle.c->x + triangle.c->y*triangle.c->y, 1},
-//            {d.x,          d.y,          d.x*d.x + d.y*d.y,                                     1}
-//        }};
-//        return matrix.det() > 0;
     }
 
     bool is_point_in_triangle(const Triangle& triangle, Point d) {
@@ -53,8 +46,8 @@ namespace math{
         Real a2 = y3 - y4;
         Real b2 = x4 - x3;
         Real c2 = x3 * y4 - x4 * y3;
-        if ((a1 / a2) == (b1 / b2)) return nullptr;
         Real det = a1 * b2 - a2 * b1;
+        if (fabs(det) <=0.0000000f) return nullptr;
         Real x = (b1 * c2 - b2 * c1) / det;
         Real y = (a2 * c1 - a1 * c2) / det;
         return std::make_shared<Point>(x,y);
@@ -65,21 +58,42 @@ namespace math{
         Real slope = (line.end->y - line.start->y)/(line.end->x - line.start->x);
         Real m = -1.0f*(1.0f/slope);
         Real b = middle.y - m * middle.x;
-        Real x = 2.0f*middle.x + 1.0f;
+        Real x = 2.0f*middle.x + 1.33f;
         Real y = m*x + b;
         Point next(x,y);
         return math::Line(std::make_shared<Point>(middle), std::make_shared<Point>(next));
     }
 
     Point get_circle_center_around_triangle(const Triangle &triangle) {
-        Line ab(triangle.a, triangle.b), bc(triangle.b, triangle.c);
-        Line bi_ab = math::bisection(ab), bi_bc = bisection(bc);
+        Line ab(triangle.a, triangle.b), bc(triangle.b, triangle.c), ac(triangle.a, triangle.c);
+        Line bi_ab = math::bisection(ab), bi_bc = bisection(bc), bi_ac = bisection(ac);
         std::shared_ptr<Point> center = intersect(bi_ab, bi_bc);
+        if(center == nullptr) center = intersect(bi_ab, bi_ac);
         if(center == nullptr){
             std::stringstream ss;
             ss<<triangle;
             throw std::invalid_argument{"Triangle " + ss.str() + " is invalid!"};
         }
         return *center;
+    }
+
+    bool segment_contains_point(const Line &line, Point point) {
+        Real l1 = get_length(point, *(line.start)),
+                l2 = get_length(point, *(line.end));
+        Real l = get_length(*(line.start), *(line.end));
+        return std::fabs(l - (l1+l2)) <= 0.00000001f;
+    }
+
+    Point get_point_line_perpendicular(const Line &line, Point point) {
+        Real x1 = line.start->x, y1 = line.start->y,
+            x2 = line.end->x, y2 = line.end->y,
+            x3 = point.x, y3 = point.y;
+        Real x = (x1 * x1 * x3 - 2 * x1 * x2 * x3 + x2 * x2 * x3 + x2 *
+                (y1 - y2) * (y1 - y3) - x1 * (y1 - y2) * (y2 - y3)) /
+                        ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        Real y = (x2 * x2 * y1 + x1 * x1 * y2 + x2 * x3 * (y2 - y1) - x1 *
+                (x3 * (y2 - y1) + x2 * (y1 + y2)) + (y1 - y2) * (y1 - y2) * y3) /
+                        ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        return Point (x,y);
     }
 }

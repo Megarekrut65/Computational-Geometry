@@ -5,7 +5,8 @@
 namespace af{
     template<typename T>
     T remove_random_item(std::vector<T>& arr);
-
+}
+namespace af{
     template<typename T>
     T remove_random_item(std::vector<T> &arr) {
         if(arr.empty()){

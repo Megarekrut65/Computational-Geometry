@@ -50,6 +50,7 @@ namespace drawer{
                               norm.normalize_y(vertex->y) - point.getRadius());
             points.push_back(point);
         }
+        points[points.size()-1].setFillColor(DrawingColors::SELECT);
     }
 
     void TriangulationDrawingConverter::convert_lines() {

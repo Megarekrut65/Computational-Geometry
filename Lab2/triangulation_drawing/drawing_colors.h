@@ -7,6 +7,7 @@ namespace drawer{
         static const sf::Color BACKGROUND;
         static const sf::Color LINE;
         static const sf::Color POINT;
+        static const sf::Color SELECT;
         static const sf::Color CIRCLE;
     };
 }

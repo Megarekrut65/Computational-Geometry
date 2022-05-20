@@ -1,6 +1,5 @@
 #pragma once
 #include "../delaunay_triangulation/data/triangle.h"
-#include "../delaunay_triangulation/data/matrix/square_matrix.h"
 #include "../delaunay_triangulation/data/line.h"
 #include <cmath>
 #include <sstream>
@@ -18,4 +17,6 @@ namespace math{
     std::shared_ptr<Point> intersect(const Line& a, const Line& b);
     Line bisection(const Line& line);
     Point get_circle_center_around_triangle(const Triangle& triangle);
+    bool segment_contains_point(const Line& line, Point point);
+    Point get_point_line_perpendicular(const Line& line, Point point);
 }

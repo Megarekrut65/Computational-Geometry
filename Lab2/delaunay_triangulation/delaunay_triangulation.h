@@ -1,6 +1,5 @@
 #pragma once
 #include "data/point.h"
-#include "data/matrix/square_matrix.h"
 #include "data/triangle.h"
 #include "../additional_functions/math_functions.h"
 #include <vector>
@@ -16,7 +15,9 @@ namespace dt{
         Set points;
         Triangulation triangulation;
         Point remove_random_point();
-        void run(std::stack<pa::Pair<Face, Edge>>& stack);
+        void check_condition(std::stack<pa::Pair<Face, Edge>>& stack);
+        void add_point_inside(const Vertex& p, const Face& face);
+        void add_point_outside(const Vertex& p);
     public:
         explicit DelaunayTriangulation(Set points);
         bool add_next();

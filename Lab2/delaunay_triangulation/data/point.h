@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <cmath>
 
 namespace point {
     template<typename T>
@@ -12,6 +13,7 @@ namespace point {
 
         template<typename V>
         friend std::ostream &operator<<(std::ostream &out, const Point2D<V> &point);
+        bool operator==(const Point2D<T>&point);
     };
 
     template<typename T>
@@ -35,6 +37,11 @@ namespace point {
         out << "{" << point.x << ", " << point.y
             << "}";
         return out;
+    }
+
+    template<typename T>
+    bool Point2D<T>::operator==(const Point2D<T> &point) {
+        return std::fabs(x - point.x)<=0.0000000001f && std::fabs(y - point.y)<=0.0000000001f;
     }
 
 }

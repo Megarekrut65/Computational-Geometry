@@ -17,6 +17,7 @@ namespace line {
         void add_triangle(std::shared_ptr<tri::Triangle2D<T>> triangle);
         void change_triangle(std::shared_ptr<tri::Triangle2D<T>> old_one, std::shared_ptr<tri::Triangle2D<T>> new_one);
         std::shared_ptr<tri::Triangle2D<T>> get_opposed_triangle(std::shared_ptr<tri::Triangle2D<T>> triangle);
+        bool is_border()const;
     };
 
     template<typename T>
@@ -58,6 +59,11 @@ namespace line {
             return triangle1;
         }
         return nullptr;
+    }
+
+    template<typename T>
+    bool Line2D<T>::is_border() const {
+        return triangle1 == nullptr || triangle2 == nullptr;
     }
 
     template<typename T>
