@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include "../delaunay_triangulation/delaunay_triangulation.h"
 #include "../additional_functions/array_functions.h"
@@ -6,7 +7,7 @@
 #include "triangulation_drawing_converter.h"
 #include <vector>
 
-namespace drawer{
+namespace drawer {
     class TriangulationDrawer {
     private:
         static const unsigned HEIGHT;
@@ -20,9 +21,12 @@ namespace drawer{
         bool need_circle = true;
 
         void events();
+
         void draw();
+
     public:
-        TriangulationDrawer(const dt::Set& initial_points, dt::Set  points, int zoom = 1);
+        TriangulationDrawer(const dt::Set &initial_points, dt::Set points, int zoom = 1);
+
         void run();
     };
 }

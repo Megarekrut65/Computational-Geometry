@@ -1,6 +1,6 @@
 #include "triangulation.h"
 
-namespace dt{
+namespace dt {
 
     Triangulation::Triangulation(Point a, Point b, Point c) {
         Vertex v1 = add_point(a);
@@ -14,13 +14,13 @@ namespace dt{
 
     Face Triangulation::find_triangle(Point point) {
         Face res = nullptr;
-        for(const auto& face:faces){
-            if(math::is_point_in_triangle(*face, point)){
-                if(res == nullptr){
+        for (const auto &face: faces) {
+            if (math::is_point_in_triangle(*face, point)) {
+                if (res == nullptr) {
                     res = face;
                     continue;
                 }
-                res = math::get_area(*res) > math::get_area(*face)?face:res;
+                res = math::get_area(*res) > math::get_area(*face) ? face : res;
             }
         }
         return res;
@@ -32,16 +32,16 @@ namespace dt{
         return v;
     }
 
-    Face Triangulation::add_triangle(const Vertex& a, const Vertex& b, const Vertex& c) {
+    Face Triangulation::add_triangle(const Vertex &a, const Vertex &b, const Vertex &c) {
         Face face = std::make_shared<Triangle>(a, b, c);
         faces.push_back(face);
         return face;
     }
 
 
-    Edge Triangulation::add_line(const Face& face, const Vertex& a, const Vertex& b) {
+    Edge Triangulation::add_line(const Face &face, const Vertex &a, const Vertex &b) {
         Edge e = find_line(a, b);
-        if(e != nullptr){
+        if (e != nullptr) {
             e->add_triangle(face);
             return e;
         }
@@ -52,17 +52,17 @@ namespace dt{
     }
 
     Edge Triangulation::find_line(const Vertex &a, const Vertex &b) {
-        for(Edge edge:edges){
-            if(edge->contains(a) && edge->contains(b)){
+        for (Edge edge: edges) {
+            if (edge->contains(a) && edge->contains(b)) {
                 return edge;
             }
         }
         return nullptr;
     }
 
-    void Triangulation::remove_line(const Edge& edge) {
-        for(std::size_t i = 0; i < edges.size(); i++){
-            if(edges[i] == edge){
+    void Triangulation::remove_line(const Edge &edge) {
+        for (std::size_t i = 0; i < edges.size(); i++) {
+            if (edges[i] == edge) {
                 edges.erase(edges.begin() + i);
                 return;
             }
@@ -70,8 +70,8 @@ namespace dt{
     }
 
     void Triangulation::remove_triangle(const Face &face) {
-        for(std::size_t i = 0; i < faces.size(); i++){
-            if(faces[i] == face){
+        for (std::size_t i = 0; i < faces.size(); i++) {
+            if (faces[i] == face) {
                 faces.erase(faces.begin() + i);
                 return;
             }
@@ -90,5 +90,5 @@ namespace dt{
         return edges;
     }
 
-    Triangulation::Triangulation()=default;
+    Triangulation::Triangulation() = default;
 }

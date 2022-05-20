@@ -1,7 +1,8 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 
-namespace drawer{
+namespace drawer {
     class DrawingColors {
     public:
         static const sf::Color BACKGROUND;

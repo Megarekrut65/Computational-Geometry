@@ -2,10 +2,11 @@
 
 #include <utility>
 
-namespace dt{
+namespace dt {
     using namespace point;
-    DelaunayTriangulation::DelaunayTriangulation(Set points) : points(std::move(points)){
-        if(this->points.size() < 3){
+
+    DelaunayTriangulation::DelaunayTriangulation(Set points) : points(std::move(points)) {
+        if (this->points.size() < 3) {
             throw std::invalid_argument{"There must be 3 and more points for triangulation!"};
         }
         triangulation = Triangulation(remove_random_point(), remove_random_point(), remove_random_point());
@@ -14,7 +15,7 @@ namespace dt{
     void DelaunayTriangulation::add_point(Point point) {
         Face face = triangulation.find_triangle(point);
         Vertex p = triangulation.add_point(point);
-        if(face == nullptr){
+        if (face == nullptr) {
             add_point_outside(p);
             return;
         }
@@ -50,46 +51,14 @@ namespace dt{
         triangulation.remove_triangle(face);
     }
 
-    void DelaunayTriangulation::add_point_outside(const Vertex &p) {
-        Face min = nullptr;
-        float min_len = 0;
-        for(const auto& edge:triangulation.get_edges()){
-            if(!edge->is_border()) return;
-            Point point = math::get_point_line_perpendicular(*edge, *p);
-            if(math::segment_contains_point(*edge, point)){
-                float len = math::get_length(point, *p);
-                if(min == nullptr||len < min_len){
-                    min = std::make_shared<Triangle>(p, edge->start, edge->end);
-                    min_len = len;
-                }
-            }
-        }
-        if(min != nullptr){
-            Face face = triangulation.add_triangle(min->a, min->b, min->c);
-            triangulation.add_line(face, min->a, min->b);
-            triangulation.add_line(face, min->a, min->c);
-            Edge edge = triangulation.find_line(min->b, min->c);
-            edge->add_triangle(face);
-        }
-    }
-    Point DelaunayTriangulation::remove_random_point() {
-        return af::remove_random_item(points);
-    }
-
-    bool DelaunayTriangulation::add_next() {
-        if(points.empty()) return false;
-        add_point(remove_random_point());
-        return true;
-    }
-
     void DelaunayTriangulation::check_condition(std::stack<pa::Pair<Face, Edge>> &stack) {
-        while (!stack.empty()){
+        while (!stack.empty()) {
             auto f = stack.top();
             stack.pop();
             Face opp = f.two->get_opposed_triangle(f.one);
-            if(opp == nullptr) continue;
+            if (opp == nullptr) continue;
             Vertex d = opp->get_other(f.two->start, f.two->end);
-            if(math::is_point_in_circle(*(f.one), *d)){
+            if (math::is_point_in_circle(*(f.one), *d)) {
                 //remove old triangles
                 triangulation.remove_line(f.two);
                 triangulation.remove_triangle(f.one);
@@ -114,6 +83,39 @@ namespace dt{
                 dp->add_triangle(bpd);
             }
         }
+    }
+
+    void DelaunayTriangulation::add_point_outside(const Vertex &p) {
+        Face min = nullptr;
+        float min_len = 0;
+        for (const auto &edge: triangulation.get_edges()) {
+            if (!edge->is_border()) return;
+            Point point = math::get_point_line_perpendicular(*edge, *p);
+            if (math::segment_contains_point(*edge, point)) {
+                float len = math::get_length(point, *p);
+                if (min == nullptr || len < min_len) {
+                    min = std::make_shared<Triangle>(p, edge->start, edge->end);
+                    min_len = len;
+                }
+            }
+        }
+        if (min != nullptr) {
+            Face face = triangulation.add_triangle(min->a, min->b, min->c);
+            triangulation.add_line(face, min->a, min->b);
+            triangulation.add_line(face, min->a, min->c);
+            Edge edge = triangulation.find_line(min->b, min->c);
+            edge->add_triangle(face);
+        }
+    }
+
+    Point DelaunayTriangulation::remove_random_point() {
+        return af::remove_random_item(points);
+    }
+
+    bool DelaunayTriangulation::add_next() {
+        if (points.empty()) return false;
+        add_point(remove_random_point());
+        return true;
     }
 
     std::vector<Vertex> DelaunayTriangulation::get_vertices() {

@@ -1,21 +1,21 @@
 #pragma once
 
-namespace pa{
+namespace pa {
     template<typename One, typename Two>
-    class Pair{
+    class Pair {
     public:
         One one;
         Two two;
 
-        Pair(const One& one, const Two& two);
+        Pair(const One &one, const Two &two);
 
         Pair();
     };
 }
-namespace pa{
+namespace pa {
     template<typename One, typename Two>
     Pair<One, Two>::Pair() = default;
 
     template<typename One, typename Two>
-    Pair<One, Two>::Pair(const One& one, const Two& two):one(one), two(two) {}
+    Pair<One, Two>::Pair(const One &one, const Two &two):one(one), two(two) {}
 }
